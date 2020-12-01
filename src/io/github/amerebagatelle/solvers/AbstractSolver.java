@@ -1,4 +1,4 @@
-package java.io.github.amerebagatelle.solvers;
+package io.github.amerebagatelle.solvers;
 
 public abstract class AbstractSolver {
     public abstract void retrieveData();

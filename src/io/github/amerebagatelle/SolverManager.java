@@ -1,7 +1,8 @@
-package java.io.github.amerebagatelle;
+package io.github.amerebagatelle;
 
-import java.io.github.amerebagatelle.solvers.AbstractSolver;
-import java.io.github.amerebagatelle.solvers.Day1;
+import io.github.amerebagatelle.solvers.AbstractSolver;
+import io.github.amerebagatelle.solvers.Day1;
+
 import java.util.ArrayList;
 import java.util.List;
 

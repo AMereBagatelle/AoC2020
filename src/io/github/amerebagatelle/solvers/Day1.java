@@ -1,4 +1,4 @@
-package java.io.github.amerebagatelle.solvers;
+package io.github.amerebagatelle.solvers;
 
 import java.io.BufferedReader;
 import java.io.File;

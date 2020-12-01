@@ -1,4 +1,4 @@
-package java.io.github.amerebagatelle;
+package io.github.amerebagatelle;
 
 import java.util.Scanner;
 
