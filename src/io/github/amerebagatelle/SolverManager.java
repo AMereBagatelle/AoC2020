@@ -2,6 +2,7 @@ package io.github.amerebagatelle;
 
 import io.github.amerebagatelle.solvers.AbstractSolver;
 import io.github.amerebagatelle.solvers.Day1;
+import io.github.amerebagatelle.solvers.Day2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class SolverManager {
 
     public SolverManager() {
         solvers.add(new Day1());
+        solvers.add(new Day2());
     }
 
     public void solve(int day, int part) {

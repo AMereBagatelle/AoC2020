@@ -20,6 +20,7 @@ public class Day1 extends AbstractSolver {
                 numbers.add(Integer.parseInt(line));
                 line = reader.readLine();
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
