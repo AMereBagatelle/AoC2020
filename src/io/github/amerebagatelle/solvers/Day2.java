@@ -6,9 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Day2 extends AbstractSolver {
+    public static final Pattern pattern = Pattern.compile("^(?<begin>\\d+)-(?<end>\\d+) (?<toContain>.): (?<restOfLine>.*)$");
+
     public List<String> lines = new ArrayList<>();
 
     @Override
@@ -30,12 +34,17 @@ public class Day2 extends AbstractSolver {
     public void part1() {
         int validLines = 0;
         for (String line : lines) {
-            int[] range = getRangeBeginAndEnd(line);
-            String toContain = line.substring(line.indexOf(":") - 1, line.indexOf(":"));
-            String restOfLine = line.substring(line.indexOf(":") + 2);
+            Matcher matcher = pattern.matcher(line);
+            if (!matcher.find()) {
+                System.out.println("Failed to parse.");
+            }
+            int begin = Integer.parseInt(matcher.group("begin"));
+            int end = Integer.parseInt(matcher.group("end"));
+            String toContain = matcher.group("toContain");
+            String restOfLine = matcher.group("restOfLine");
             if (restOfLine.contains(toContain)) {
                 int count = countSubstring(restOfLine, toContain);
-                if (range[0] <= count && range[1] >= count) {
+                if (begin <= count && end >= count) {
                     validLines++;
                 }
             }
@@ -75,8 +84,7 @@ public class Day2 extends AbstractSolver {
         int count = 0;
         while (index != -1) {
             count++;
-            string = string.substring(index + 1);
-            index = string.indexOf(substring);
+            index = string.indexOf(substring, index + 1);
         }
         return count;
     }
