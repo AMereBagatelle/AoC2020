@@ -44,8 +44,10 @@ public class Day1 extends AbstractSolver {
     public void part2() {
         for (int number : numbers) {
             for (int number2 : numbers) {
+                if (number2 > 1010) continue;
                 for (int number3 : numbers) {
-                    if (number + number2 + number3 == 2020) {
+                    int result = number + number2 + number3;
+                    if (result == 2020) {
                         System.out.println("Answer: " + number * number2 * number3);
                         return;
                     }
