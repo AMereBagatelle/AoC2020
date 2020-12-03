@@ -1,7 +1,11 @@
 package io.github.amerebagatelle.solvers;
 
 public abstract class AbstractSolver {
-    public abstract void retrieveData();
+    public boolean hasData = false;
+
+    public void retrieveData() {
+        hasData = true;
+    }
 
     public abstract void part1();
 

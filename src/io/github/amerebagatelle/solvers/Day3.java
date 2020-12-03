@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day3 extends AbstractSolver {
-    public long height;
     public List<String> lines = new ArrayList<>();
 
     @Override
@@ -18,9 +17,10 @@ public class Day3 extends AbstractSolver {
             BufferedReader reader = new BufferedReader(new FileReader(new File("input3.txt")));
 
             lines.addAll(reader.lines().collect(Collectors.toList()));
-            height = reader.lines().count();
 
             reader.close();
+
+            super.retrieveData();
         } catch (IOException e) {
             e.printStackTrace();
         }

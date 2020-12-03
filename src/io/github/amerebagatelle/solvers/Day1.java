@@ -21,6 +21,8 @@ public class Day1 extends AbstractSolver {
                 line = reader.readLine();
             }
             reader.close();
+
+            super.retrieveData();
         } catch (IOException e) {
             e.printStackTrace();
         }

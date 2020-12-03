@@ -20,11 +20,15 @@ public class SolverManager {
     public void solve(int day, int part) {
         for (AbstractSolver solver : solvers) {
             if (day == solver.getDay()) {
-                solver.retrieveData();
+                if (!solver.hasData) solver.retrieveData();
+
+                long startTime = System.nanoTime();
                 switch (part) {
                     case 1 -> solver.part1();
                     case 2 -> solver.part2();
                 }
+                long elapsedTime = System.nanoTime() - startTime;
+                System.out.println("Solved in: " + elapsedTime / 1000000 + "ms");
             }
         }
     }
