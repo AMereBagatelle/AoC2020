@@ -15,6 +15,9 @@ public class Main {
         System.out.println("What part of the day would you like to solve?");
         part = in.nextInt();
 
+        long startTime = System.nanoTime();
         solverManager.solve(day, part);
+        long elapsedTime = System.nanoTime() - startTime;
+        System.out.println("Solved in: " + elapsedTime / 1000000 + "ms");
     }
 }
