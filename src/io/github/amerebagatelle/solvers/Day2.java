@@ -56,10 +56,15 @@ public class Day2 extends AbstractSolver {
     public void part2() {
         int validLines = 0;
         for (String line : lines) {
-            int[] range = getRangeBeginAndEnd(line);
-            String toContain = line.substring(line.indexOf(":") - 1, line.indexOf(":"));
-            String restOfLine = line.substring(line.indexOf(":") + 1);
-            if (restOfLine.substring(range[0], range[0] + 1).equals(toContain) ^ restOfLine.substring(range[1], range[1] + 1).equals(toContain)) {
+            Matcher matcher = pattern.matcher(line);
+            if (!matcher.find()) {
+                System.out.println("Failed to parse.");
+            }
+            int begin = Integer.parseInt(matcher.group("begin"));
+            int end = Integer.parseInt(matcher.group("end"));
+            char toContain = matcher.group("toContain").charAt(0);
+            String restOfLine = matcher.group("restOfLine");
+            if (restOfLine.charAt(begin - 1) == toContain ^ restOfLine.charAt(end - 1) == toContain) {
                 validLines++;
             }
         }
@@ -69,14 +74,6 @@ public class Day2 extends AbstractSolver {
     @Override
     public int getDay() {
         return 2;
-    }
-
-    private int[] getRangeBeginAndEnd(String line) {
-        int[] results = new int[2];
-        int dashIndex = line.indexOf("-");
-        results[0] = Integer.parseInt(line.substring(0, dashIndex));
-        results[1] = Integer.parseInt(line.substring(dashIndex + 1, line.indexOf(":") - 2));
-        return results;
     }
 
     private int countSubstring(String string, String substring) {
