@@ -1,5 +1,7 @@
 package io.github.amerebagatelle.solvers;
 
+import io.github.amerebagatelle.util.RegexPatternBuilder;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +13,15 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Day2 extends AbstractSolver {
-    public static final Pattern pattern = Pattern.compile("^(?<begin>\\d+)-(?<end>\\d+) (?<toContain>.): (?<restOfLine>.*)$");
+    private static final Pattern pattern = RegexPatternBuilder.create()
+            .addLiteral("^")
+            .addGroup("begin", "\\d+")
+            .addLiteral("-")
+            .addGroup("end", "\\d+")
+            .addLiteral(" ")
+            .addGroup("toContain", ".")
+            .addLiteral(": ")
+            .addGroup("restOfLine", ".*").build();
 
     public final List<String> lines = new ArrayList<>();
 

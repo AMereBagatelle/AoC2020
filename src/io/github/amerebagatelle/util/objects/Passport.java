@@ -1,5 +1,6 @@
 package io.github.amerebagatelle.util.objects;
 
+import io.github.amerebagatelle.util.RegexPatternBuilder;
 import io.github.amerebagatelle.util.exception.PassportParseException;
 
 import java.util.HashMap;
@@ -8,7 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Passport {
-    private static final Pattern pattern = Pattern.compile("(?<key>.*):(?<restOfLine>.*)$");
+    private static final Pattern pattern = RegexPatternBuilder.create()
+            .addGroup("key", ".*")
+            .addLiteral(":")
+            .addGroup("restOfLine", ".*").build();
 
     public String original;
     public final HashMap<String, String> fields = new HashMap<>();
