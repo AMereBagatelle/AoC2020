@@ -42,16 +42,18 @@ public class Day4 extends AbstractSolver {
     private int getValidPassports(boolean testForValidity) {
         StringBuilder temp = new StringBuilder();
         int valid = 0;
-        for (String line : lines) {
-            if (!line.isBlank()) {
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+            boolean blank = line.isBlank();
+            if (!blank) {
                 temp.append(line.replace("\n", "")).append(" ");
-            } else {
+            }
+            if (blank || i == lines.size() - 1) { // extra check here is just for that last line
                 temp.deleteCharAt(temp.length() - 1);
                 if (tryPassportParse(temp, testForValidity)) valid++;
                 temp = new StringBuilder();
             }
         }
-        if (tryPassportParse(temp, testForValidity)) valid++; // get that last line
 
         return valid;
     }
