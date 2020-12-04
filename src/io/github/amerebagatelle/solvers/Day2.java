@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Day2 extends AbstractSolver {
     public static final Pattern pattern = Pattern.compile("^(?<begin>\\d+)-(?<end>\\d+) (?<toContain>.): (?<restOfLine>.*)$");
 
-    public List<String> lines = new ArrayList<>();
+    public final List<String> lines = new ArrayList<>();
 
     @Override
     public void retrieveData() {

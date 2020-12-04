@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day1 extends AbstractSolver {
-    public List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
     @Override
     public void retrieveData() {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day3 extends AbstractSolver {
-    public List<String> lines = new ArrayList<>();
+    private final List<String> lines = new ArrayList<>();
 
     @Override
     public void retrieveData() {
