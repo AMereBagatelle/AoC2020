@@ -31,54 +31,38 @@ public class Day4 extends AbstractSolver {
 
     @Override
     public void part1() {
-        StringBuilder temp = new StringBuilder();
-        int valid = 0;
-        for (String line : lines) {
-            if (!line.isBlank()) {
-                temp.append(line.replace("\n", "")).append(" ");
-            } else {
-                try {
-                    new Passport(temp.substring(0, temp.length() - 1), false);
-                    valid++;
-                } catch (PassportParseException e) {
-                    System.out.println("Could not parse passport");
-                }
-                temp = new StringBuilder();
-            }
-        }
-        try {
-            new Passport(temp.substring(0, temp.length() - 1), false);
-            valid++;
-        } catch (PassportParseException e) {
-            System.out.println("Could not parse passport");
-        }
-        System.out.println("Answer: " + valid);
+        System.out.println("Answer: " + getValidPassports(false));
     }
 
     @Override
     public void part2() {
+        System.out.println("Answer: " + getValidPassports(true));
+    }
+
+    private int getValidPassports(boolean testForValidity) {
         StringBuilder temp = new StringBuilder();
         int valid = 0;
         for (String line : lines) {
             if (!line.isBlank()) {
                 temp.append(line.replace("\n", "")).append(" ");
             } else {
-                try {
-                    new Passport(temp.substring(0, temp.length() - 1), true);
-                    valid++;
-                } catch (PassportParseException e) {
-                    System.out.println("Could not parse passport");
-                }
+                temp.deleteCharAt(temp.length() - 1);
+                if (tryPassportParse(temp, testForValidity)) valid++;
                 temp = new StringBuilder();
             }
         }
+        if (tryPassportParse(temp, testForValidity)) valid++; // get that last line
+
+        return valid;
+    }
+
+    private boolean tryPassportParse(StringBuilder toParse, boolean testForValidity) {
         try {
-            new Passport(temp.substring(0, temp.length() - 1), true);
-            valid++;
+            new Passport(toParse.toString(), testForValidity);
+            return true;
         } catch (PassportParseException e) {
-            System.out.println("Could not parse passport");
+            return false;
         }
-        System.out.println("Answer: " + valid);
     }
 
     @Override

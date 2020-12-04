@@ -4,8 +4,12 @@ import io.github.amerebagatelle.util.exception.PassportParseException;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Passport {
+    private static final Pattern pattern = Pattern.compile("(?<key>.*):(?<restOfLine>.*)$");
+
     public String original;
     public final HashMap<String, String> fields = new HashMap<>();
 
@@ -20,9 +24,13 @@ public class Passport {
         String[] split = original.split(" ");
         int parsed = 0;
         for (String s : split) {
+            Matcher matcher = pattern.matcher(s);
+            if (!matcher.find()) {
+                throw new PassportParseException("");
+            }
             for (String value : parseFor) {
                 if (s.contains(value)) {
-                    values.put(value, s.substring(s.indexOf(":") + 1));
+                    values.put(value, matcher.group("restOfLine"));
                     parsed++;
                 }
             }
@@ -39,11 +47,11 @@ public class Passport {
         String ecl = fields.get("ecl");
         String pid = fields.get("pid");
         if (!(byr >= 1920 && byr <= 2002 &&
+                validateHair(hcl) &&
+                validateHeight(hgt) &&
+                ecl.matches("amb|blu|brn|gry|grn|hzl|oth") &&
                 iyr >= 2010 && iyr <= 2020 &&
                 eyr >= 2020 && eyr <= 2030 &&
-                validateHeight(hgt) &&
-                validateHair(hcl) &&
-                ecl.matches("amb|blu|brn|gry|grn|hzl|oth") &&
                 pid.length() == 9)
         ) {
             throw new PassportParseException("");
