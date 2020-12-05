@@ -17,7 +17,6 @@ public class Main {
             System.out.println("What part of the day would you like to solve?");
             part = in.nextInt();
             solverManager.solve(day, part);
-            System.out.println("Solve another?  True or False");
         }
     }
 }
