@@ -53,7 +53,7 @@ public class Day5 extends AbstractSolver {
     @Override
     public void part2() {
         int highest = 0;
-        int lowest = 0;
+        int lowest = 2056;
         List<Integer> seats = new ArrayList<>();
         for (String line : lines) {
             int seatId = getSeatId(line);
