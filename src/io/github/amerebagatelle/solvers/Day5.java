@@ -41,10 +41,10 @@ public class Day5 extends AbstractSolver {
 
     private int getSeatId(String seat) {
         int id = 0;
-        for (int i = 0; i < seat.toCharArray().length; i++) {
-            char c = seat.toCharArray()[i];
+        for (int i = seat.toCharArray().length - 1; i >= 0; i--) {
+            char c = seat.toCharArray()[seat.toCharArray().length - 1 - i];
             if (!(c == 'F' || c == 'L')) {
-                id += 1 << (9 - i);
+                id += 1 << i;
             }
         }
         return id;
