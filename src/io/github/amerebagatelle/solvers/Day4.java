@@ -1,6 +1,5 @@
 package io.github.amerebagatelle.solvers;
 
-import io.github.amerebagatelle.util.exception.PassportParseException;
 import io.github.amerebagatelle.util.objects.Passport;
 
 import java.io.BufferedReader;
@@ -59,12 +58,7 @@ public class Day4 extends AbstractSolver {
     }
 
     private boolean tryPassportParse(StringBuilder toParse, boolean testForValidity) {
-        try {
-            new Passport(toParse.toString(), testForValidity);
-            return true;
-        } catch (PassportParseException e) {
-            return false;
-        }
+        return Passport.parsePassportString(toParse.toString(), testForValidity);
     }
 
     @Override

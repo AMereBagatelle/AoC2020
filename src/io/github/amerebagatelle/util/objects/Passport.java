@@ -1,7 +1,6 @@
 package io.github.amerebagatelle.util.objects;
 
 import io.github.amerebagatelle.util.RegexPatternBuilder;
-import io.github.amerebagatelle.util.exception.PassportParseException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,35 +13,37 @@ public class Passport {
             .addLiteral(":")
             .addGroup("restOfLine", ".*").build();
 
-    public String original;
-    public final HashMap<String, String> fields = new HashMap<>();
+    private static HashMap<String, String> fields = new HashMap<>();
 
-    public Passport(String passport, boolean validate) throws PassportParseException {
-        original = passport;
-        parseValues(fields);
-        if (validate) validateValues();
+    public static boolean parsePassportString(String passport, boolean validate) {
+        fields = new HashMap<>();
+        boolean parsed = parseValues(passport);
+        boolean validated;
+        if (validate && parsed) validated = validateValues();
+        else validated = true;
+        return parsed && validated;
     }
 
-    private void parseValues(HashMap<String, String> values) throws PassportParseException {
+    private static boolean parseValues(String passportString) {
         List<String> parseFor = List.of("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid");
-        String[] split = original.split(" ");
+        String[] split = passportString.split(" ");
         int parsed = 0;
         for (String s : split) {
             Matcher matcher = pattern.matcher(s);
             if (!matcher.find()) {
-                throw new PassportParseException("");
+                throw new IllegalStateException("Can't match to matcher, is something wrong with the input?");
             }
             for (String value : parseFor) {
                 if (s.contains(value)) {
-                    values.put(value, matcher.group("restOfLine"));
+                    fields.put(value, matcher.group("restOfLine"));
                     parsed++;
                 }
             }
         }
-        if (parsed < 7) throw new PassportParseException("");
+        return parsed == 7;
     }
 
-    private void validateValues() throws PassportParseException {
+    private static boolean validateValues() {
         int byr = Integer.parseInt(fields.get("byr"));
         int iyr = Integer.parseInt(fields.get("iyr"));
         int eyr = Integer.parseInt(fields.get("eyr"));
@@ -50,19 +51,16 @@ public class Passport {
         String hcl = fields.get("hcl");
         String ecl = fields.get("ecl");
         String pid = fields.get("pid");
-        if (!(byr >= 1920 && byr <= 2002 &&
+        return !(byr >= 1920 && byr <= 2002 &&
                 validateHair(hcl) &&
                 validateHeight(hgt) &&
                 ecl.matches("amb|blu|brn|gry|grn|hzl|oth") &&
                 iyr >= 2010 && iyr <= 2020 &&
                 eyr >= 2020 && eyr <= 2030 &&
-                pid.length() == 9)
-        ) {
-            throw new PassportParseException("");
-        }
+                pid.length() == 9);
     }
 
-    private boolean validateHeight(String height) {
+    private static boolean validateHeight(String height) {
         int heightNumber = Integer.parseInt(height.replaceAll("cm|in", ""));
         if (height.contains("cm")) {
             return heightNumber >= 150 && heightNumber <= 193;
@@ -71,7 +69,7 @@ public class Passport {
         } else return false;
     }
 
-    private boolean validateHair(String color) {
+    private static boolean validateHair(String color) {
         if (color.charAt(0) != '#') return false;
         return color.matches("#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})");
     }
