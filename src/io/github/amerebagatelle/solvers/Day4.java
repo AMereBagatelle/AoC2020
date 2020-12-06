@@ -44,9 +44,7 @@ public class Day4 extends AbstractSolver {
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
             boolean blank = line.isBlank();
-            if (!blank) {
-                temp.append(line.replace("\n", "")).append(" ");
-            }
+            if (!blank) temp.append(line.replace("\n", "")).append(" ");
             if (blank || i == lines.size() - 1) { // extra check here is just for that last line
                 temp.deleteCharAt(temp.length() - 1);
                 if (tryPassportParse(temp, testForValidity)) valid++;

@@ -24,7 +24,6 @@ public class Day5 extends AbstractSolver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        super.retrieveData();
     }
 
     @Override
@@ -32,9 +31,7 @@ public class Day5 extends AbstractSolver {
         int highest = 0;
         for (String line : lines) {
             int seatId = getSeatId(line);
-            if (seatId > highest) {
-                highest = seatId;
-            }
+            if (seatId > highest) highest = seatId;
         }
         System.out.println("Answer: " + highest);
     }
@@ -43,9 +40,7 @@ public class Day5 extends AbstractSolver {
         int id = 0;
         for (int i = 0; i < seat.toCharArray().length; i++) {
             char c = seat.toCharArray()[i];
-            if (!(c == 'F' || c == 'L')) {
-                id += 1 << (9 - i);
-            }
+            if (!(c == 'F' || c == 'L')) id += 1 << (9 - i);
         }
         return id;
     }
@@ -57,18 +52,12 @@ public class Day5 extends AbstractSolver {
         List<Integer> seats = new ArrayList<>();
         for (String line : lines) {
             int seatId = getSeatId(line);
-            if (seatId > highest) {
-                highest = seatId;
-            }
-            if (seatId < lowest) {
-                lowest = seatId;
-            }
+            if (seatId > highest) highest = seatId;
+            if (seatId < lowest) lowest = seatId;
             seats.add(seatId);
         }
         for (int i = lowest; i < highest; i++) {
-            if (!seats.contains(i)) {
-                System.out.println("Seat found: " + i);
-            }
+            if (!seats.contains(i)) System.out.println("Seat found: " + i);
         }
     }
 
