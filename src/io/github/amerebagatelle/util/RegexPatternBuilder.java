@@ -24,6 +24,6 @@ public class RegexPatternBuilder {
     }
 
     public Pattern build() {
-        return Pattern.compile(builder.append("$").toString());
+        return Pattern.compile(builder.toString());
     }
 }
