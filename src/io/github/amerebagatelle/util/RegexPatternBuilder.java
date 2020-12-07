@@ -3,7 +3,7 @@ package io.github.amerebagatelle.util;
 import java.util.regex.Pattern;
 
 public class RegexPatternBuilder {
-    private final StringBuilder builder = new StringBuilder("^");
+    private final StringBuilder builder = new StringBuilder();
 
     private RegexPatternBuilder() {
 
