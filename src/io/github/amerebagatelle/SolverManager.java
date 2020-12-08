@@ -8,6 +8,7 @@ import io.github.amerebagatelle.solvers.Day4;
 import io.github.amerebagatelle.solvers.Day5;
 import io.github.amerebagatelle.solvers.Day6;
 import io.github.amerebagatelle.solvers.Day7;
+import io.github.amerebagatelle.solvers.Day8;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class SolverManager {
         solvers.add(new Day5());
         solvers.add(new Day6());
         solvers.add(new Day7());
+        solvers.add(new Day8());
     }
 
     public void solve(int day, int part) {
