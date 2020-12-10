@@ -1,5 +1,7 @@
 package io.github.amerebagatelle.solvers;
 
+import io.github.amerebagatelle.util.Util;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -66,7 +68,7 @@ public class Day9 extends AbstractSolver {
                 List<String> numbers = lines.subList(i1, i1 + i);
 
                 if (sum(numbers) == result1) {
-                    List<Long> numbersClone = getLongArray(numbers);
+                    List<Long> numbersClone = Util.getLongArray(numbers);
                     Collections.sort(numbersClone);
                     System.out.println("Answer: " + (numbersClone.get(0) + numbersClone.get(numbersClone.size() - 1)));
                     break first;
@@ -79,18 +81,6 @@ public class Day9 extends AbstractSolver {
         long result = 0;
         for (String number : numbers) {
             result += Long.parseLong(number);
-        }
-        return result;
-    }
-
-    private List<Long> getLongArray(List<String> stringArray) {
-        ArrayList<Long> result = new ArrayList<>();
-        for (String stringValue : stringArray) {
-            try {
-                //Convert String to Integer, and store it into integer array list.
-                result.add(Long.parseLong(stringValue));
-            } catch (NumberFormatException ignored) {
-            }
         }
         return result;
     }

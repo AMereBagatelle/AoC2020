@@ -2,6 +2,7 @@ package io.github.amerebagatelle;
 
 import io.github.amerebagatelle.solvers.AbstractSolver;
 import io.github.amerebagatelle.solvers.Day1;
+import io.github.amerebagatelle.solvers.Day10;
 import io.github.amerebagatelle.solvers.Day2;
 import io.github.amerebagatelle.solvers.Day3;
 import io.github.amerebagatelle.solvers.Day4;
@@ -27,6 +28,7 @@ public class SolverManager {
         solvers.add(new Day7());
         solvers.add(new Day8());
         solvers.add(new Day9());
+        solvers.add(new Day10());
     }
 
     public void solve(int day, int part) {
