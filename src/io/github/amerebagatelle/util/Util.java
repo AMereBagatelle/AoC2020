@@ -27,4 +27,18 @@ public class Util {
         }
         return result;
     }
+
+    public static boolean charArraysEquals(char[][] first, char[][] second) {
+        boolean result = true;
+        outer:
+        for (int i = 0; i < first.length; i++) {
+            for (int i1 = 0; i1 < first[i].length; i1++) {
+                if (first[i][i1] != second[i][i1]) {
+                    result = false;
+                    break outer;
+                }
+            }
+        }
+        return result;
+    }
 }
