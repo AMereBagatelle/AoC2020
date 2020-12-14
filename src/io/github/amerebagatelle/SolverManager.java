@@ -5,6 +5,7 @@ import io.github.amerebagatelle.solvers.Day1;
 import io.github.amerebagatelle.solvers.Day10;
 import io.github.amerebagatelle.solvers.Day11;
 import io.github.amerebagatelle.solvers.Day12;
+import io.github.amerebagatelle.solvers.Day13;
 import io.github.amerebagatelle.solvers.Day2;
 import io.github.amerebagatelle.solvers.Day3;
 import io.github.amerebagatelle.solvers.Day4;
@@ -33,6 +34,7 @@ public class SolverManager {
         solvers.add(new Day10());
         solvers.add(new Day11());
         solvers.add(new Day12());
+        solvers.add(new Day13());
     }
 
     public void solve(int day, int part) {
